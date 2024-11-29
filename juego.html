@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preguntados</title>
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.7;
+      object-fit: cover;
+    }
+    .imagen {
+      width: 200%;
+      max-height: 150px;
+      border-radius: 10px;
+      margin-top: 10px;
+      object-fit: contain;
+    }
+    .container {
+      width: 90%;
+      max-width: 800px;
+      background-color: #c1adc7;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .container:hover {
+      transform: scale(1.02);
+    }
+    .titulo {
+      text-align: center;
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    .pregunta-section {
+      text-align: center;
+      max-height: 700px;
+      overflow: hidden;
+    }
+    #pregunta-texto {
+      font-size: 24px;
+      color: #333;
+      word-wrap: break-word;
+      white-space: pre-line;
+      margin: 10px 0;
+      max-width: 100%;
+    }
+    .opciones {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .opciones button {
+      width: 80%;
+      margin: 10px 0;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    .opciones button:hover {
+      transform: scale(1.05);
+      background-color: #e2e6ea;
+    }
+    .opciones .correcto {
+      background-color: #28a745;
+      color: white;
+    }
+    .opciones .incorrecto {
+      background-color: #dc3545;
+      color: white;
+    }
+    .imagen {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    #mensaje-error {
+      color: #dc3545;
+      font-weight: bold;
+      text-align: center;
+    }
+    #btn-music {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 20px 40px;
+      font-size: 18px;
+      border-radius: 12px;
+    }
+    #btn-siguiente {
+      display: none;
+      padding: 10px 20px;
+      font-size: 24px;
+      color: #ffffff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    #btn-siguiente:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+    }
+
+    /* Corazones a la izquierda */
+    .hearts {
+      position: fixed;
+      left: 20px;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .heart {
+      font-size: 30px;
+      color: red;
+      margin-bottom: 10px;
+      transition: opacity 0.3s;
+    }
+    .hidden {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+<iframe class="video-bg" src="https://www.youtube.com/embed/vP_yQPjnRpo?autoplay=1&loop=1&playlist=vP_yQPjnRpo&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<!-- Botón de Volver -->
+<div style="
+    position: fixed; 
+    bottom: 20px; 
+    left: 20px; 
+    padding: 10px 20px;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;">
+  <button onclick="location.href='educa.html'" style="
+      all: unset; /* Elimina estilos del botón por defecto */
+      cursor: pointer;">
+    Volver a inicio
+  </button>
+</div>
+
+
+
+
+
+<div class="container">
+  <h1 class="titulo">Preguntados</h1>
+
+  <!-- Sección de preguntas -->
+  <div class="pregunta-section">
+    <h2 id="pregunta-texto">Pregunta</h2>
+    <img id="imagen-pregunta" class="imagen" src="" alt="" style="display:none;">
+    <div class="opciones">
+      <button onclick="seleccionarRespuesta(0)" id="btn-opcion-0">Opción 1</button>
+      <button onclick="seleccionarRespuesta(1)" id="btn-opcion-1">Opción 2</button>
+      <button onclick="seleccionarRespuesta(2)" id="btn-opcion-2">Opción 3</button>
+      <button onclick="seleccionarRespuesta(3)" id="btn-opcion-3">Opción 4</button>
+    </div>
+    <p id="resultado" style="font-size: 20px; margin-top: 20px;"></p>
+    <p id="puntos" style="font-size: 20px; margin-top: 20px;">Puntos: 0</p>
+    <button class="btn" onclick="siguientePregunta()" id="btn-siguiente">Siguiente</button>
+  </div>
+
+  <!-- Reproductor de música -->
+  <audio id="background-audio" loop>
+    <source src="all of a sudden, everything becomes alright....mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+  </audio>
+</div>
+
+<!-- Botón para controlar la música -->
+<button class="btn" id="btn-music" onclick="toggleMusic()">Reproducir Música</button>
+
+<!-- Corazones -->
+<div class="hearts" id="hearts">
+  <span class="heart" id="heart-0">❤️</span>
+  <span class="heart" id="heart-1">❤️</span>
+  <span class="heart" id="heart-2">❤️</span>
+  <span class="heart" id="heart-3">❤️</span>
+  <span class="heart" id="heart-4">❤️</span>
+</div>
+
+<script>
+  let preguntaActual = 0;
+  let isMusicPlaying = false;
+  let corazonActual = 5;  // Inicia con 5 corazones
+  const audio = document.getElementById('background-audio');
+  const hearts = document.getElementById('hearts');
+  let preguntas = [];
+  let puntos = 0;  // Contador de puntos
+  let malaRacha = 0;  // Para llevar la cuenta de la mala racha
+  let respuestasCorrectasSeguidas = 0;  // Variable para contar respuestas correctas seguidas
+
+  async function obtenerPreguntas() {
+    try {
+      // Usamos los parámetros min y max para obtener el rango de preguntas
+      const response = await fetch(`http://localhost:3000/preguntas?nivel_inicial=${nivelSeleccionado[0]}&nivel_final=${nivelSeleccionado[1]}`);
+      preguntas = await response.json();
+      preguntas = preguntas.map(p => ({
+        pregunta: p.pregunta,
+        opciones: JSON.parse(p.opciones),
+        respuesta: p.respuesta_correcta,
+        imagen: p.imagen
+      }));
+      cargarPregunta();
+    } catch (error) {
+      console.error('Error al cargar preguntas:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Obtener los parámetros de la URL
+    const params = new URLSearchParams(window.location.search);
+    const min = params.get('min');
+    const max = params.get('max');
+
+    // Verificar que los parámetros min y max existan
+    if (min && max) {
+      nivelSeleccionado = [parseInt(min), parseInt(max)];
+    } else {
+      // Si no hay parámetros, usamos los valores por defecto
+      console.warn('No se encontró rango de niveles, se usará el nivel por defecto.');
+    }
+
+    obtenerPreguntas();
+  });
+  document.addEventListener('DOMContentLoaded', obtenerPreguntas);
+
+  function toggleMusic() {
+    if (isMusicPlaying) {
+      audio.pause();
+      document.getElementById("btn-music").innerText = "Reproducir Música";
+    } else {
+      audio.play();
+      document.getElementById("btn-music").innerText = "Pausar Música";
+    }
+    isMusicPlaying = !isMusicPlaying;
+  }
+
+  function cargarPregunta() {
+    const pregunta = preguntas[preguntaActual];
+    document.getElementById('pregunta-texto').innerText = pregunta.pregunta;
+    document.getElementById('imagen-pregunta').src = pregunta.imagen;
+    document.getElementById('imagen-pregunta').style.display = pregunta.imagen ? 'block' : 'none';
+
+    pregunta.opciones.forEach((opcion, index) => {
+      document.getElementById(`btn-opcion-${index}`).innerText = opcion;
+    });
+
+    document.getElementById('resultado').textContent = '';
+    document.getElementById('btn-siguiente').style.display = 'none';
+
+    const botones = document.querySelectorAll('.opciones button');
+    botones.forEach((boton) => {
+      boton.disabled = false;
+      boton.classList.remove('correcto', 'incorrecto');
+    });
+}
+
+
+  function seleccionarRespuesta(opcionSeleccionada) {
+
+    if (corazonActual <= 0) {
+    terminarJuego();  // Si no hay más corazones, termina el juego
+    return;
+  }
+  const pregunta = preguntas[preguntaActual];
+  const respuestaCorrecta = pregunta.respuesta;
+  const opciones = pregunta.opciones;
+  const seleccionada = opciones[opcionSeleccionada];
+
+  const resultado = document.getElementById("resultado");
+
+  // Deshabilitar todos los botones después de una selección
+  const botones = document.querySelectorAll(".opciones button");
+  botones.forEach(boton => {
+    boton.disabled = true;  // Deshabilitar el botón
+  });
+
+  if (seleccionada === respuestaCorrecta) {
+    resultado.textContent = "¡Respuesta correcta!";
+    resultado.style.color = "green";
+    puntos += 100;
+    malaRacha = 0;
+    respuestasCorrectasSeguidas++;  // Aumentar el contador de respuestas correctas seguidas
+
+    // Si se contestaron 2 preguntas correctas seguidas, se gana un corazón extra
+    if (respuestasCorrectasSeguidas === 2) {
+      if (corazonActual < 5) {  // Asegurarse de no superar el número máximo de corazones
+        corazonActual++;
+        const heart = document.getElementById(`heart-${corazonActual - 1}`);
+        if (heart) {
+          heart.classList.remove('hidden');  // Mostrar el nuevo corazón
+        }
+      }
+      respuestasCorrectasSeguidas = 0;  // Restablecer el contador de respuestas correctas seguidas
+    }
+  } else {
+    resultado.textContent = `Respuesta incorrecta. La respuesta correcta es: ${respuestaCorrecta}`;
+    resultado.style.color = "red";
+    puntos -= 30;
+    malaRacha++;
+
+    if (corazonActual > 0) {
+      const heart = document.getElementById(`heart-${corazonActual - 1}`);
+      if (heart) {
+        heart.classList.add('hidden');
+        corazonActual--;
+      }
+    }
+
+    if (malaRacha >= 3) {
+      puntos -= 20;
+      resultado.textContent += " - ¡Mala racha!";
+    }
+
+    respuestasCorrectasSeguidas = 0;  // Restablecer el contador de respuestas correctas seguidas
+  }
+
+  // Actualizar puntos
+  document.getElementById("puntos").textContent = `Puntos: ${puntos}`;
+
+  // Resaltar respuesta correcta
+  botones.forEach((boton, index) => {
+    if (opciones[index] === respuestaCorrecta) {
+      boton.classList.add('correcto');
+    } else {
+      boton.classList.add('incorrecto');
+    }
+  });
+
+  // Mostrar el botón siguiente
+  document.getElementById("btn-siguiente").style.display = "block";
+}
+
+
+  function siguientePregunta() {
+  // Asegúrate de que el índice de la pregunta no se salga del rango
+  if (preguntaActual < preguntas.length - 1) {
+    preguntaActual++;  // Incrementa el índice para la siguiente pregunta
+    cargarPregunta();  // Carga la siguiente pregunta
+  } else {
+    // Si ya no hay más preguntas, muestra el mensaje final
+    document.getElementById("resultado").textContent = "¡Has terminado el juego!";
+    document.getElementById("btn-siguiente").style.display = "none";  // Oculta el botón
+  }
+
+  // Resetea las opciones de los botones
+  const botones = document.querySelectorAll(".opciones button");
+  botones.forEach(boton => {
+    boton.classList.remove('correcto', 'incorrecto');  // Limpia el estado de los botones
+  });
+
+  // Oculta la respuesta anterior antes de mostrar la siguiente pregunta
+  document.getElementById("resultado").textContent = '';
+}
+
+function terminarJuego() {
+  document.getElementById("resultado").textContent = "¡Juego terminado! No tienes más corazones.";
+  document.getElementById("btn-siguiente").style.display = "none";  // Ocultar el botón de siguiente
+  const botones = document.querySelectorAll(".opciones button");
+  botones.forEach(boton => boton.disabled = true);  // Deshabilitar botones
+}
+</script>
+
+</body>
+</html>

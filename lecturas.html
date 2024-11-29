@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturas</title>
+    <style>
+
+.video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.7;
+      object-fit: cover;
+    }
+        body {
+            font-family: Arial 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f4f8;
+            color: #4209df;
+        }
+        h1 {
+            color: #4CAF50;
+            text-shadow: 2px 2px #ff6b6b;
+        }
+        .pdf-viewer {
+            width: 80%;
+            height: 600px;
+            border: 2px solid #4CAF50;
+            margin-top: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón de Volver -->
+<div style="
+position: fixed; 
+bottom: 20px; 
+left: 20px; 
+padding: 10px 20px;
+font-size: 20px;
+color: #ffffff;
+background-color: #6c757d;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s;">
+<button onclick="location.href='educa.html'" style="
+  all: unset; /* Elimina estilos del botón por defecto */
+  cursor: pointer;">
+Volver a inicio
+</button>
+</div>
+
+    <iframe class="video-bg" src="https://www.youtube.com/embed/vP_yQPjnRpo?autoplay=1&loop=1&playlist=vP_yQPjnRpo&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <h1>Libro de Lecturas</h1>
+
+    <!-- Cambia la ruta del PDF a la ubicación correcta -->
+    <iframe src="libro-de-lecturas.pdf" class="pdf-viewer"></iframe>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educa</title>
+    <style>
+        /* Fondo con gradiente de color */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff0109 10%, #180c09 100%);
+            font-family: Arial, sans-serif;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+    font-size: 3em;
+    color: #000000;
+    text-shadow: 2px 2px #ff0000;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    animation: fadeIn 2s;
+}
+
+        h2 {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 10px;
+            animation: slideIn 1s forwards;
+            opacity: 0;
+        }
+
+        .mision {
+            color: #00796b;
+        }
+
+        .vision {
+            color: #303f9f;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            max-width: 600px;
+            margin: 10px auto;
+            animation: fadeIn 1.5s;
+        }
+
+        .video-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      opacity: 0.7;
+      object-fit: cover;
+    }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 15px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 700px;
+        }
+
+        a, button {
+            font-size: 1.5em;
+            color: #ffffff;
+            text-decoration: none;
+            border: none;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 15px;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            animation: bounce 1s infinite;
+        }
+
+        a:hover, button:hover {
+            background-color: #388E3C;
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .sticker {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .button-icon {
+            width: 30px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .music-button {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-button img {
+            width: 30px;
+            height: auto;
+        }
+
+        .music-button.disabled {
+            background-color: #555;
+        }
+
+        .music-button.disabled::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            clip-path: polygon(0 0, 100% 100%, 100% 0, 0 100%);
+        }
+
+        /* Estilos para la animación de transición de imágenes */
+        #changing-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px; /* Tamaño fijo de altura */
+            object-fit: cover; /* Ajuste de la imagen */
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: slideTransition 1s ease-in-out forwards;
+        }
+
+        @keyframes slideTransition {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Estilo para el formulario de registro */
+        .register-form {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .register-form input {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        .register-form button {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Estilo para el botón de mostrar/ocultar el formulario */
+        .register-toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .register-toggle-button:hover {
+            background-color: #388E3C;
+        }
+
+                /* Estilo para el botón de inicio de sesión */
+                .login-toggle-button {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.0s;
+        }
+
+        .login-toggle-button:hover {
+            background-color: #388E3C;
+        }
+    </style>
+</head>
+<body>
+    <h1>Educa</h1>
+
+
+ <!-- Botones para mostrar/ocultar el formulario de registro y login -->
+<button class="register-toggle-button" onclick="toggleRegisterForm()">Registro</button>
+<button class="login-toggle-button" onclick="toggleLoginForm()">Iniciar sesión</button>
+<button class="logout-toggle-button" id="logout-toggle-button" style="display: none;" onclick="logoutUser()">Cerrar sesión</button>
+
+<!-- Formulario de inicio de sesión -->
+<div class="register-form" id="loginForm" style="display: none;">
+    <form id="loginFormForm" onsubmit="event.preventDefault(); loginUser();">
+        <input type="text" id="login-username" placeholder="Usuario" required><br>
+        <input type="password" id="login-password" placeholder="Contraseña" required><br>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+</div>
+
+<!-- Información del usuario (Nombre y Puntaje) -->
+<div id="user-info" style="display: none;">
+    <p>Bienvenido, <span id="user-name"></span></p>
+    <p>Tu puntaje es: <span id="user-score"></span></p>
+    <button id="logout-button" onclick="logoutUser()">Cerrar sesión</button>
+</div>
+
+<!-- Formulario de registro -->
+<div class="register-form" id="registerForm" style="display: none;">
+    <form id="registerFormForm">
+        <input type="text" id="username" placeholder="Usuario" required><br>
+        <input type="password" id="password" placeholder="Contraseña" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+</div>
+
+
+
+<script>
+
+const loginForm = document.getElementById('login-form');
+  const loginBtn = document.getElementById('login-btn');
+    
+// Toggle Register Form
+function toggleRegisterForm() {
+    var form = document.getElementById('registerForm');
+    form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+}
+// Toggle Login Form
+function toggleLoginForm() {
+    const form = document.getElementById('loginForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+// Mostrar/ocultar formulario de registro si se hace clic fuera de él
+window.onclick = function(event) {
+    var form = document.getElementById('registerForm');
+    var toggleButton = document.querySelector('.register-toggle-button');
+    if (event.target !== form && event.target !== toggleButton && !form.contains(event.target)) {
+        form.style.display = 'none';
+    }
+}
+        
+
+
+
+
+    // Cerrar el formulario de registro si se hace clic fuera de él
+    window.onclick = function(event) {
+        var form = document.getElementById('registerForm');
+        var toggleButton = document.querySelector('.register-toggle-button');
+        if (event.target !== form && event.target !== toggleButton && !form.contains(event.target)) {
+            form.style.display = 'none';
+        }
+    }
+
+// Enviar el formulario de registro
+document.getElementById('registerFormForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('username').value;
+    const contraseña = document.getElementById('password').value;
+
+    fetch('http://localhost:3000/registro', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nombre: nombre, contrasena: contraseña })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert('Usuario registrado exitosamente');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            toggleRegisterForm();
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al registrar el usuario');
+    });
+});
+
+// Iniciar sesión y mostrar información del usuario
+function loginUser() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert('Inicio de sesión exitoso');
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('user-name').textContent = data.nombre;
+            document.getElementById('user-score').textContent = data.puntaje;
+            document.getElementById('logout-toggle-button').style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al iniciar sesión');
+    });
+}
+
+// Cerrar sesión
+function logoutUser() {
+    fetch('http://localhost:3000/logout', { method: 'POST' })
+    .then(response => response.json())
+    .then(() => {
+        document.getElementById('user-info').style.display = 'none';
+        document.getElementById('logout-toggle-button').style.display = 'none';
+        alert('Sesión cerrada');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al cerrar sesión');
+    });
+}
+</script>
+
+
+<iframe class="video-bg" src="https://www.youtube.com/embed/vP_yQPjnRpo?autoplay=1&loop=1&playlist=vP_yQPjnRpo&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
+    <img id="changing-image" src="estudiando.jpg" alt="Niños estudiando">
+
+    <audio id="background-audio" loop>
+        <source src="all of a sudden, everything becomes alright....mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <button class="music-button" id="music-button" onclick="toggleMusic()">
+        <img src="NOTA.png" alt="Nota Musical">
+    </button>
+    
+    <section>
+        <h2 class="mision">Misión</h2>
+        <p>Proveer una educación interactiva y divertida, utilizando tecnología innovadora para el aprendizaje.</p>
+    </section>
+    <section>
+        <h2 class="vision">Visión</h2>
+        <p>Convertir el aprendizaje en una experiencia entretenida y accesible para todos los estudiantes.</p>
+    </section>
+
+    <div class="button-container">
+        <a href="seleccion.html">
+            <img src="CONTROL.png" alt="Control" class="button-icon">Jugar Ahora
+        </a>
+    </div>
+
+    <div class="button-container">
+        <a href="Lecturas.html">
+            <img src="LIBROO.png" alt="Libro" class="button-icon">Lecturas
+        </a>
+    </div>
+
+    <div class="button-container">
+        <a href="tutoriales.html">
+            <img src="TUTORIAL.png" alt="Tutorial" class="button-icon">Tutoriales
+        </a>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar el formulario de registro
+        function toggleRegisterForm() {
+            var form = document.getElementById('registerForm');
+            form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Cerrar el formulario de registro si se hace clic fuera de él
+        window.onclick = function(event) {
+            var form = document.getElementById('registerForm');
+            var toggleButton = document.querySelector('.register-toggle-button');
+            if (event.target !== form && event.target !== toggleButton && !form.contains(event.target)) {
+                form.style.display = 'none';
+            }
+        }
+
+        // Función para activar/desactivar la música
+        function toggleMusic() {
+            var audio = document.getElementById('background-audio');
+            var musicButton = document.getElementById('music-button');
+
+            if (audio.paused) {
+                audio.play();
+                musicButton.classList.remove('disabled');
+            } else {
+                audio.pause();
+                musicButton.classList.add('disabled');
+            }
+        }
+
+        function loginUser() {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    fetch('http://localhost:3000/login', {  // Cambia la URL si es necesario
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username, password: password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert('Inicio de sesión exitoso');
+            // Redirigir a la página principal o cambiar el estado de la UI
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Hubo un error al iniciar sesión');
+    });
+}
+
+
+
+    </script>
+</body>
+</html>

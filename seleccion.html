@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Categoría</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.7;
+            object-fit: cover;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .explanation {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Botón de Volver -->
+<div style="
+position: fixed; 
+bottom: 20px; 
+left: 20px; 
+padding: 10px 20px;
+font-size: 20px;
+color: #ffffff;
+background-color: #6c757d;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s;">
+<button onclick="location.href='educa.html'" style="
+  all: unset; /* Elimina estilos del botón por defecto */
+  cursor: pointer;">
+Volver a inicio
+</button>
+</div>
+
+    <iframe class="video-bg" src="https://www.youtube.com/embed/vP_yQPjnRpo?autoplay=1&loop=1&playlist=vP_yQPjnRpo&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <h1>Selecciona una categoría de preguntas</h1>
+    
+    <!-- Explicación del juego -->
+    <div class="explanation">
+        <h2>¿Cómo jugar?</h2>
+        <p>En este juego, debes responder preguntas de diferentes categorías. El objetivo es  respondiendo correctamente.</p>
+        
+        <h3>¿Qué son los corazones?</h3>
+        <p>Tienes un total de 5 corazones al inicio del juego. Cada vez que respondas una pregunta incorrectamente, perderás un corazón. Si te quedas sin corazones, ¡el juego termina! Así que asegúrate de elegir bien tus respuestas para mantenerlos durante todo el juego.</p>
+    </div>
+
+    <button onclick="selectCategory('matematicas_geografia')">Matemáticas y Geografía </button>
+    <button onclick="selectCategory('tecnologia_bilingue')">Tecnología y Bilingüe </button>
+    <button onclick="selectCategory('espanol_historia')">Español e Historia </button>
+
+    <script>
+    function selectCategory(category) {
+        // Define los rangos de id_nivel para cada categoría
+        const ranges = {
+            'matematicas_geografia': { min: 1000, max: 1030 },
+            'tecnologia_bilingue': { min: 2000, max: 2030 },
+            'espanol_historia': { min: 3000, max: 3030 }
+        };
+
+        // Obtener el rango de la categoría seleccionada
+        const range = ranges[category];
+        if (range) {
+            // Redirigir al juego con los parámetros en la URL
+            window.location.href = `juego.html?min=${range.min}&max=${range.max}`;
+        } else {
+            alert('Categoría no válida.');
+        }
+    }
+    </script>
+</body>
+</html>

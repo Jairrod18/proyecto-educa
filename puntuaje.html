@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Puntuaciones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        th {
+            background-color: #ff6f61;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .crown {
+            font-size: 1.5em;
+            color: gold;
+        }
+        .best-player {
+            font-size: 1em;
+            color: gold;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Posición</th>
+                <th>Nombre</th>
+                <th>Puntuación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="crown">👑</span> 1</td>
+                <td>Jugador1 <span class="best-player">Tú eres el mejor jugador</span></td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Jugador2</td>
+                <td>950</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Jugador3</td>
+                <td>900</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Jugador4</td>
+                <td>850</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Jugador5</td>
+                <td>800</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Jugador6</td>
+                <td>750</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Jugador7</td>
+                <td>700</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Jugador8</td>
+                <td>650</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Jugador9</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Jugador10</td>
+                <td>550</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
