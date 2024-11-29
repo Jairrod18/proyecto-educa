@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 // Conexión a la base de datos
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: '1234', 
+    user: '',
+    password: '', 
     database: 'eduplayia', 
     port: 3306
 });
